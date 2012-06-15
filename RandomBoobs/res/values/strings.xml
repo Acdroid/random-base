@@ -6,5 +6,8 @@
     
     
 	<string name="image_saved">Image saved to:</string>
+	<string name="click_image">Tap on the image to see a new one.</string>
+	
+	<string name="mb">MB</string>
 
 </resources>

@@ -25,9 +25,31 @@ public class FeedUtil {
 	private static String[] feed_list = {
 		
 		"http://definemotorsports.tumblr.com/rss",
-		"http://eyegasmiccars.tumblr.com/",
+		"http://eyegasmiccars.tumblr.com/rss",
 		"http://fuckyeahclassiccars.tumblr.com/rss",
-		"http://rollsroycemotorcars.tumblr.com/rss"		
+		"http://rollsroycemotorcars.tumblr.com/rss",
+		"http://shelby4271965.tumblr.com/rss",
+		"http://automotiveporn.tumblr.com/rss",
+		"http://bennnnnnyo.tumblr.com/rss",
+		"http://carpr0n.tumblr.com/rss",
+		"http://turnerbudds-carblog.tumblr.com/rss",
+		"http://carinteriors.tumblr.com/rss",
+		"http://vintagecars.tumblr.com/rss",
+		"http://citsandbugs.tumblr.com/rss",
+		"http://mesmomeugenero.tumblr.com/rss",
+		"http://wellisnthatnice.tumblr.com/rss",
+		"http://crazyforcars.tumblr.com/rss",
+		"http://hypercharged.tumblr.com/rss",
+		"http://process-vision.tumblr.com/rss",
+		"http://ferrari-world.tumblr.com/rss",
+		"http://rwd-cars.tumblr.com/rss",
+		"http://givemecars.tumblr.comrss",
+		"http://imcarsforever.tumblr.com/rss",
+		"http://thinkstance.tumblr.com/rss",
+		"http://musclecardreaming.tumblr.com/rss",
+		"http://fuckyeahsexytrucks.tumblr.com/rss",
+		"http://carsonrecord.tumblr.com/rss",
+		"http://goodoldvalves.tumblr.com/rss"
 	}; 
 	
 	
