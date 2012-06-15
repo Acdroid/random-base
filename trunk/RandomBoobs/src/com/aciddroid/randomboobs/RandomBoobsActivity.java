@@ -7,7 +7,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
+import java.text.DecimalFormat;
 import java.text.Format;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -25,6 +28,7 @@ import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.aciddroid.randomboobs.feeds.FeedUtil;
@@ -34,13 +38,16 @@ public class RandomBoobsActivity extends Activity {
 	
 	private static final String APP_DIR = "randomBoobs";
 	
-	
+	/**Bytes used on this session*/
+	private long session_bytes = 0;
 	
 
 	private boolean downloading = false;
 
 	private static ProgressBar progressBar;
 	private static ProgressBar waitBar;
+	
+	private TextView bandwidth;
 
 	private FeedUtil fu;
 	private Bitmap currentBitmap = null;
@@ -63,6 +70,7 @@ public class RandomBoobsActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
+		bandwidth = (TextView) this.findViewById(R.id.bandwidth);
 
 		waitBar = (ProgressBar) this.findViewById(R.id.wait);
 
@@ -72,7 +80,7 @@ public class RandomBoobsActivity extends Activity {
 		getFeeds();
 
 
-		//Image and its action
+		//Save image and its action
 		ImageView saveIcon = (ImageView) findViewById(R.id.save);
 		saveIcon.setOnClickListener(new OnClickListener() {
 			
@@ -81,6 +89,20 @@ public class RandomBoobsActivity extends Activity {
 				saveImage();				
 			}
 		});
+		
+		
+		//Refresh image and its action
+		ImageView refreshIcon = (ImageView) findViewById(R.id.refresh);
+		refreshIcon.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				progressBar.setVisibility(View.VISIBLE);
+				getFeeds();				
+			}
+		});
+
+		
 		
 		
 	}
@@ -121,6 +143,7 @@ public class RandomBoobsActivity extends Activity {
 
 		currentImage = 0;
 
+		//When clicking on the image
 		RelativeLayout contentContainer = (RelativeLayout) findViewById(R.id.content_container);
 
 		contentContainer.setOnClickListener(new OnClickListener() {
@@ -145,13 +168,19 @@ public class RandomBoobsActivity extends Activity {
 					}
 					else {
 						waitBar.setVisibility(View.VISIBLE);
-						Log.v("TEST", "Displaying: "+(currentImage+1)+"/"+max);				
-						new SetImage().execute(fu.getImages().get(++currentImage));
+						Log.v("TEST", "Displaying: "+(currentImage+1)+"/"+max);
+						
+						currentImage++;
+						
+						new SetImage().execute(fu.getImages().get(currentImage));
 					}								
 				}
 			}
 
-		});		
+		});
+		
+		Toast t = Toast.makeText(this, getString(R.string.click_image), 1000);
+		t.show();
 	}
 
 
@@ -172,6 +201,11 @@ public class RandomBoobsActivity extends Activity {
 		else
 			Log.v("TEST", "Image is null");
 
+		
+		
+		String form = new DecimalFormat("#.##").format(((double)session_bytes/1024.0/1024.0));
+		
+		bandwidth.setText(form+" "+getString(R.string.mb));
 		waitBar.setVisibility(View.GONE);
 	}
 
@@ -219,6 +253,29 @@ public class RandomBoobsActivity extends Activity {
 		}
 
 	}
+	
+	
+	/**
+	 * Gets the image filesize without downloading it
+	 * */
+	private int getFilesize(String file_url) {
+		
+		int file_size = 0;
+		
+		try {
+			
+			URL url = new URL(file_url);
+			URLConnection urlConnection = url.openConnection();
+			urlConnection.connect();
+			file_size = urlConnection.getContentLength();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return file_size;
+		
+	}
 
 
 
@@ -235,6 +292,7 @@ public class RandomBoobsActivity extends Activity {
 
 			try {
 
+				session_bytes += getFilesize(url[0]);
 				Log.v("TEST", "Trying to download: "+url[0]);
 				bm = BitmapFactory.decodeStream((InputStream)new URL(url[0]).getContent());
 
