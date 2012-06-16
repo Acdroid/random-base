@@ -118,9 +118,12 @@ public class RandomBoobsActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				updating = true;
-				progressBar.setVisibility(View.VISIBLE);
-				getFeeds();				
+				
+				if (!updating) {
+					updating = true;
+					progressBar.setVisibility(View.VISIBLE);
+					getFeeds();
+				}
 			}
 		});
 
