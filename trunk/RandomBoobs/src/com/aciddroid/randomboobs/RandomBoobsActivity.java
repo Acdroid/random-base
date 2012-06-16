@@ -44,6 +44,7 @@ public class RandomBoobsActivity extends Activity {
 
 
 	private boolean downloading = false;
+	private boolean updating = false;
 
 	private static ProgressBar progressBar;
 	private static ProgressBar waitBar;
@@ -117,6 +118,7 @@ public class RandomBoobsActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
+				updating = true;
 				progressBar.setVisibility(View.VISIBLE);
 				getFeeds();				
 			}
@@ -147,6 +149,7 @@ public class RandomBoobsActivity extends Activity {
 					Log.v("TEST", "OK");
 					progressBar.setVisibility(View.GONE);
 					startBrowsing();
+					updating = false;
 				}
 
 			}
@@ -174,7 +177,7 @@ public class RandomBoobsActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 
-				if (!downloading) {
+				if (!downloading && !updating) {
 
 					downloading = true;
 
