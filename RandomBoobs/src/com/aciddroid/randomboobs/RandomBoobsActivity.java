@@ -281,6 +281,9 @@ public class RandomBoobsActivity extends Activity {
 	}
 
 	
+	/**
+	 * Shares an image on the selected media
+	 * */
 	private void shareImage(){
 		Intent shareIntent = new Intent(android.content.Intent.ACTION_SEND);
 		shareIntent.setType("text/plain");
