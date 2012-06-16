@@ -105,7 +105,7 @@ public class FeedUtil {
 
 		return null;
 		
-	}
+	} 
 
 
 	private class DownloadFeeds extends AsyncTask<String[], Integer, List<String>> {
