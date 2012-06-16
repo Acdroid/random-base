@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -11,11 +12,11 @@ import org.mcsoxford.rss.RSSFeed;
 import org.mcsoxford.rss.RSSItem;
 import org.mcsoxford.rss.RSSReader;
 
-import com.aciddroid.randomboobs.RandomBoobsActivity;
-
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.util.Log;
+
+import com.aciddroid.randomboobs.RandomBoobsActivity;
 
 
 
@@ -55,6 +56,9 @@ public class FeedUtil {
 	
 	public static final int MESSAGE_FINISHED= 0;
 	public static final int MESSAGE_ERROR= 1;
+	
+	
+	private static final int MAX_FEEDS = 10;
 	
 	private Handler h;	
 	
@@ -116,13 +120,44 @@ public class FeedUtil {
 	    	
 	    	int elements = feeds[0].length;
 	    	
+	    	
+	    	//We set a limit to avoid long init waiting times
+	    	String[] feeds_list;
+	    	if (elements >= MAX_FEEDS) {
+	    		
+	    		elements = MAX_FEEDS;
+	    		
+	    		feeds_list = new String[MAX_FEEDS];
+	    		
+	    		Random randGen = new Random();
+	    		
+	    		for (int i=0; i<MAX_FEEDS; i++) {
+	    			
+	    			int n = randGen.nextInt(MAX_FEEDS);
+	    			
+	    			feeds_list[i] = feeds[0][n];
+	    		}
+	    			    		
+	    	}	    	
+	    	//Not many :)
+	    	else {
+	    		
+	    		feeds_list = new String[elements];
+	    		for (int i=0; i<elements; i++) {
+	    			
+	    			feeds_list[i] = feeds[0][i];
+	    		}	    		
+	    	}
+	    	
+	    	
+	    	
 	    	for (int i=0; i<elements; i++) {
 	    		
 	    		//Download feed
-	    		Log.v("TEST", "Downloading: "+feeds[0][i]);
+	    		Log.v("TEST", "Downloading: "+feeds_list[i]);
 	    		
 	    		try {
-					RSSFeed feed = reader.load(feeds[0][i]);
+					RSSFeed feed = reader.load(feeds_list[i]);
 										
 					List<RSSItem> rssItems = feed.getItems();
 					
