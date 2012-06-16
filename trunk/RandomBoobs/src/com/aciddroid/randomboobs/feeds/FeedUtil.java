@@ -33,7 +33,7 @@ public class FeedUtil {
 	public static final int MESSAGE_ERROR= 1;
 	
 	
-	private static final int MAX_FEEDS = 10;
+	private static final int MAX_FEEDS = 7;
 	
 	private Handler h;	
 	
