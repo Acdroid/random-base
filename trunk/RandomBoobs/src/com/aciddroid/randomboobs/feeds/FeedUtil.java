@@ -12,10 +12,12 @@ import org.mcsoxford.rss.RSSFeed;
 import org.mcsoxford.rss.RSSItem;
 import org.mcsoxford.rss.RSSReader;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.util.Log;
 
+import com.aciddroid.randomboobs.R;
 import com.aciddroid.randomboobs.RandomBoobsActivity;
 
 
@@ -23,36 +25,9 @@ import com.aciddroid.randomboobs.RandomBoobsActivity;
 public class FeedUtil {	
 	
 	
-	private static String[] feed_list = {
-		
-		"http://definemotorsports.tumblr.com/rss",
-		"http://eyegasmiccars.tumblr.com/rss",
-		"http://fuckyeahclassiccars.tumblr.com/rss",
-		"http://rollsroycemotorcars.tumblr.com/rss",
-		"http://shelby4271965.tumblr.com/rss",
-		"http://automotiveporn.tumblr.com/rss",
-		"http://bennnnnnyo.tumblr.com/rss",
-		"http://carpr0n.tumblr.com/rss",
-		"http://turnerbudds-carblog.tumblr.com/rss",
-		"http://carinteriors.tumblr.com/rss",
-		"http://vintagecars.tumblr.com/rss",
-		"http://citsandbugs.tumblr.com/rss",
-		"http://mesmomeugenero.tumblr.com/rss",
-		"http://wellisnthatnice.tumblr.com/rss",
-		"http://crazyforcars.tumblr.com/rss",
-		"http://hypercharged.tumblr.com/rss",
-		"http://process-vision.tumblr.com/rss",
-		"http://ferrari-world.tumblr.com/rss",
-		"http://rwd-cars.tumblr.com/rss",
-		"http://givemecars.tumblr.comrss",
-		"http://imcarsforever.tumblr.com/rss",
-		"http://thinkstance.tumblr.com/rss",
-		"http://musclecardreaming.tumblr.com/rss",
-		"http://fuckyeahsexytrucks.tumblr.com/rss",
-		"http://carsonrecord.tumblr.com/rss",
-		"http://goodoldvalves.tumblr.com/rss"
-	}; 
+	private static String[] feed_list;
 	
+	private static final boolean TEST_MODE = false; //true = NSFW
 	
 	public static final int MESSAGE_FINISHED= 0;
 	public static final int MESSAGE_ERROR= 1;
@@ -76,12 +51,19 @@ public class FeedUtil {
 	
 	
 	/*Inicia el proceso de descarga de feeds y avisa al handler una vez acabado*/
-	public FeedUtil(Handler handler) {
+	public FeedUtil(Handler handler, Context context) {
 		
 
 		if (handler != null) {
 
 			h = handler;
+			
+			//Obtenemos la lista de feeds del array de Strings
+			if (TEST_MODE)
+				feed_list = context.getResources().getStringArray(R.array.feeds_test);
+			else
+				feed_list = context.getResources().getStringArray(R.array.feeds);
+			
 			
 			//Sacamos todas las imagenes y las metemos en la var feeds
 			new DownloadFeeds().execute(feed_list);
