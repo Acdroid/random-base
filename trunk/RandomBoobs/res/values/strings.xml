@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <string name="hello">Hello World, RandomBoobsActivity!</string>
-    <string name="app_name">RandomBoobs</string>
+    <string name="app_name">RandomB</string>
     
     
 	<string name="image_saved">Image saved to:</string>
 	<string name="click_image">Tap on the image to see a new one.</string>
+	
+	<string name="share_image_title">RamdomB</string>
+	<string name="share_image_text1">Look what I\'ve found using </string>
+	<string name="share_image_text2"> for Android !</string>
 	
 	<string name="mb">MB</string>
 

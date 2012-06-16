@@ -14,6 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -34,19 +35,19 @@ import android.widget.Toast;
 import com.aciddroid.randomboobs.feeds.FeedUtil;
 
 public class RandomBoobsActivity extends Activity {
-	
-	
+
+
 	private static final String APP_DIR = "randomBoobs";
-	
+
 	/**Bytes used on this session*/
 	private long session_bytes = 0;
-	
+
 
 	private boolean downloading = false;
 
 	private static ProgressBar progressBar;
 	private static ProgressBar waitBar;
-	
+
 	private TextView bandwidth;
 
 	private FeedUtil fu;
@@ -83,18 +84,27 @@ public class RandomBoobsActivity extends Activity {
 		//Save image and its action
 		ImageView saveIcon = (ImageView) findViewById(R.id.save);
 		saveIcon.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				saveImage();				
 			}
 		});
-		
-		
+
+		//Share image and its action
+		ImageView shareIcon = (ImageView) findViewById(R.id.share);
+		shareIcon.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				shareImage();	
+			}
+		});
+
 		//Refresh image and its action
 		ImageView refreshIcon = (ImageView) findViewById(R.id.refresh);
 		refreshIcon.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				progressBar.setVisibility(View.VISIBLE);
@@ -102,23 +112,25 @@ public class RandomBoobsActivity extends Activity {
 			}
 		});
 
-		
-		
-		
+
+
+
 	}
-	
-	
-	
+
+
+
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
-	    super.onConfigurationChanged(newConfig);
+		super.onConfigurationChanged(newConfig);
 
-	    // Checks the orientation of the screen
-	    if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-	        Toast.makeText(this, "landscape", Toast.LENGTH_SHORT).show();
-	    } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
-	        Toast.makeText(this, "portrait", Toast.LENGTH_SHORT).show();
-	    }
+		// Checks the orientation of the screen
+		if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+			Toast.makeText(this, "landscape", Toast.LENGTH_SHORT).show();
+		} else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
+			Toast.makeText(this, "portrait", Toast.LENGTH_SHORT).show();
+		}
+
+		Toast.makeText(this, "otro", Toast.LENGTH_SHORT).show();
 	}
 
 
@@ -183,16 +195,16 @@ public class RandomBoobsActivity extends Activity {
 					else {
 						waitBar.setVisibility(View.VISIBLE);
 						Log.v("TEST", "Displaying: "+(currentImage+1)+"/"+max);
-						
+
 						currentImage++;
-						
+
 						new SetImage().execute(fu.getImages().get(currentImage));
 					}								
 				}
 			}
 
 		});
-		
+
 		Toast t = Toast.makeText(this, getString(R.string.click_image), 1000);
 		t.show();
 	}
@@ -215,10 +227,10 @@ public class RandomBoobsActivity extends Activity {
 		else
 			Log.v("TEST", "Image is null");
 
-		
-		
+
+
 		String form = new DecimalFormat("#.##").format(((double)session_bytes/1024.0/1024.0));
-		
+
 		bandwidth.setText(form+" "+getString(R.string.mb));
 		waitBar.setVisibility(View.GONE);
 	}
@@ -229,66 +241,84 @@ public class RandomBoobsActivity extends Activity {
 	 * Saves image to location
 	 * */
 	private void saveImage() {
-				
+
 
 		if (currentBitmap != null) {
 			Format formatter;
 			Date date = new Date();
-			
+
 			ByteArrayOutputStream bytes = new ByteArrayOutputStream();		
 			currentBitmap.compress(Bitmap.CompressFormat.JPEG, 98, bytes);
-			
+
 			formatter = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
 			String time = formatter.format(date);
-	
+
 			String path		= Environment.getExternalStorageDirectory()+"/"+APP_DIR+"/";
 			String filename = time+".jpg";
 			String dest		= path+filename;									
-			
+
 			File f		= new File(dest);
 			File dir	= new File(path);
-	
+
 			dir.mkdirs();
-					
+
 			try {
-				
+
 				f.createNewFile();
 				FileOutputStream fo = null;
 				fo = new FileOutputStream(f);
 				fo.write(bytes.toByteArray());
-	
+
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
+
 			Log.v("TEST", "Saved: "+dest);
 			Toast t = Toast.makeText(this, getString(R.string.image_saved)+dest, 1000);
 			t.show();
 		}
 
 	}
+
 	
+	private void shareImage(){
+		Intent shareIntent = new Intent(android.content.Intent.ACTION_SEND);
+		shareIntent.setType("text/plain");
+
+		//shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Some text");
+		
+		String text = getResources().getString(R.string.share_image_text1) + " " +  
+						getResources().getString(R.string.app_name) + " " +
+						getResources().getString(R.string.share_image_text2) + " " +
+						"\n\n" + fu.getImages().get(currentImage);
+						
+		
+		shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, text);
+		startActivity(Intent.createChooser(shareIntent, getResources().getString(R.string.share_image_title)));
+		
+	}
 	
+
 	/**
 	 * Gets the image filesize without downloading it
 	 * */
 	private int getFilesize(String file_url) {
-		
+
 		int file_size = 0;
-		
+
 		try {
-			
+
 			URL url = new URL(file_url);
 			URLConnection urlConnection = url.openConnection();
 			urlConnection.connect();
 			file_size = urlConnection.getContentLength();
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 		return file_size;
-		
+
 	}
 
 
