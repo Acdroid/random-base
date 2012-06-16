@@ -38,6 +38,8 @@ public class RandomBoobsActivity extends Activity {
 
 
 	private static final String APP_DIR = "randomBoobs";
+	
+	private static final int MAX_CACHE_SIZE = 500;
 
 	/**Bytes used on this session*/
 	private long session_bytes = 0;
@@ -53,6 +55,9 @@ public class RandomBoobsActivity extends Activity {
 
 	private FeedUtil fu;
 	private Bitmap currentBitmap = null;
+	
+	
+	private Bitmap[] bitmapCache;
 
 	//The image currently shown
 	private int currentImage;
@@ -64,7 +69,7 @@ public class RandomBoobsActivity extends Activity {
 
 
 	/**
-	 * Called when scren orientation is changed or keyboard is poped open/close
+	 * Called when screen orientation is changed or keyboard is poped open/close
 	 * Do nothing.
 	 * */
 	@Override
@@ -82,16 +87,34 @@ public class RandomBoobsActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
+		//Init cache
+		bitmapCache = new Bitmap[MAX_CACHE_SIZE];
+		
+		//GUI elements
 		bandwidth = (TextView) this.findViewById(R.id.bandwidth);
-
 		waitBar = (ProgressBar) this.findViewById(R.id.wait);
-
 		progressBar = (ProgressBar) this.findViewById(R.id.progress);
 		progressBar.setVisibility(View.VISIBLE);
 
+		//Get content
 		getFeeds();
 
+		//Previous image and its action
+		ImageView previousIcon = (ImageView) findViewById(R.id.previous);
+		previousIcon.setOnClickListener(new OnClickListener() {
 
+			@Override
+			public void onClick(View v) {
+				
+				if (currentImage > 0) {
+					currentImage--;
+					//new SetImage().execute(fu.getImages().get(currentImage));
+					setBitmapImage(bitmapCache[currentImage]);
+				}
+			}
+		});
+		
+		
 		//Save image and its action
 		ImageView saveIcon = (ImageView) findViewById(R.id.save);
 		saveIcon.setOnClickListener(new OnClickListener() {
@@ -126,10 +149,6 @@ public class RandomBoobsActivity extends Activity {
 				}
 			}
 		});
-
-
-
-
 	}
 
 
@@ -231,10 +250,14 @@ public class RandomBoobsActivity extends Activity {
 			Log.v("TEST", "Image is null");
 
 
-
+		//Cache
+		bitmapCache[currentImage] = bm;
+		
+		//BW check
 		String form = new DecimalFormat("#.##").format(((double)session_bytes/1024.0/1024.0));
-
 		bandwidth.setText(form+" "+getString(R.string.mb));
+		
+		//GUI
 		waitBar.setVisibility(View.GONE);
 	}
 
