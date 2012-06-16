@@ -87,8 +87,6 @@ public class RandomBoobsActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
-		//Init cache
-		bitmapCache = new Bitmap[MAX_CACHE_SIZE];
 		
 		//GUI elements
 		bandwidth = (TextView) this.findViewById(R.id.bandwidth);
@@ -108,7 +106,6 @@ public class RandomBoobsActivity extends Activity {
 				
 				if (currentImage > 0) {
 					currentImage--;
-					//new SetImage().execute(fu.getImages().get(currentImage));
 					setBitmapImage(bitmapCache[currentImage]);
 				}
 			}
@@ -162,6 +159,9 @@ public class RandomBoobsActivity extends Activity {
 	private void getFeeds() {
 
 
+		//Init cache
+		bitmapCache = new Bitmap[MAX_CACHE_SIZE];
+		
 		Handler h = new Handler() {
 
 			@Override
@@ -219,8 +219,15 @@ public class RandomBoobsActivity extends Activity {
 						Log.v("TEST", "Displaying: "+(currentImage+1)+"/"+max);
 
 						currentImage++;
-
-						new SetImage().execute(fu.getImages().get(currentImage));
+						
+						//Cache
+						if (bitmapCache[currentImage] == null)
+							new SetImage().execute(fu.getImages().get(currentImage));
+						else {
+							setBitmapImage(bitmapCache[currentImage]);
+							downloading = false;
+						}
+						
 					}								
 				}
 			}
