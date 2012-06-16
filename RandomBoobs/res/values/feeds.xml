@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+     <string-array
+        name="feeds">
+        <item>http://awesometits.tumblr.com/rss</item>
+        <item>http://www.twotitsperhour.com/rss</item>
+        <item>http://xogogo.tumblr.com/rss</item>
+        <item>http://lustinyou.tumblr.com/rss</item>
+        <item>http://sexy.onehouronepic.com/rss</item>
+        <item>http://tln1mwk7.tumblr.com/rss</item>
+        <item>http://anotherpornview.tumblr.com/rss</item>
+        <item>http://love-tits.tumblr.com/rss</item>
+        <item>http://adult-area.tumblr.com/rss</item>
+        <item>http://90dspecial.com/rss</item>
+        <item>http://flat-girls-are-so-90-s.tumblr.com/</item>
+        <item>http://mamelles.net/rss</item>
+        <item>http://fuckyeahfuckable.tumblr.com/rss</item>
+        <item>http://ceedo.tumblr.com/rss</item>
+        <item>http://eatmycake.tumblr.com/rss</item>
+        <item>http://ihateeverythingbutyou.tumblr.com/rss</item>
+        <item>http://enuffsaid.tumblr.com/rss</item>
+        <item>http://ilovetits.tumblr.com/rss</item>
+        <item>http://gobusty.tumblr.com/rss</item>
+        <item>http://girlsandnature.com/rss</item>
+    </string-array>
+    
+     
+     
+    <!-- Feeds Test (cars feeds) -->
+    <string-array
+        name="feeds_test">
+        <item>http://definemotorsports.tumblr.com/rss</item>
+        <item>http://eyegasmiccars.tumblr.com/rss</item>
+        <item>http://fuckyeahclassiccars.tumblr.com/rss</item>
+        <item>http://rollsroycemotorcars.tumblr.com/rss</item>
+        <item>http://shelby4271965.tumblr.com/rss</item>
+        <item>http://automotiveporn.tumblr.com/rss</item>
+        <item>http://bennnnnnyo.tumblr.com/rss</item>
+        <item>http://carpr0n.tumblr.com/rss</item>
+        <item>http://turnerbudds-carblog.tumblr.com/rss</item>
+        <item>http://carinteriors.tumblr.com/rss</item>
+        <item>http://vintagecars.tumblr.com/rss</item>
+        <item>http://citsandbugs.tumblr.com/rss</item>
+        <item>http://mesmomeugenero.tumblr.com/rss</item>
+        <item>http://wellisnthatnice.tumblr.com/rss</item>
+        <item>http://crazyforcars.tumblr.com/rss</item>
+        <item>http://hypercharged.tumblr.com/rss</item>
+        <item>http://process-vision.tumblr.com/rss</item>
+        <item>http://ferrari-world.tumblr.com/rss</item>
+        <item>http://rwd-cars.tumblr.com/rss</item>
+        <item>http://givemecars.tumblr.com/rss</item>
+        <item>http://thinkstance.tumblr.com/rss</item>
+        <item>http://musclecardreaming.tumblr.com/rss</item>
+        <item>http://fuckyeahsexytrucks.tumblr.com/rss</item>
+        <item>http://carsonrecord.tumblr.com/rss</item>
+        <item>http://goodoldvalves.tumblr.com/rss</item>
+    </string-array>
+</resources>
