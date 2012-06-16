@@ -105,9 +105,7 @@ public class FeedUtil {
 	    	
 	    	//We set a limit to avoid long init waiting times
 	    	String[] feeds_list;
-	    	if (elements >= MAX_FEEDS) {
-	    		
-	    		elements = MAX_FEEDS;
+	    	if (elements >= MAX_FEEDS) {	    			    		
 	    		
 	    		feeds_list = new String[MAX_FEEDS];
 	    		
@@ -115,10 +113,12 @@ public class FeedUtil {
 	    		
 	    		for (int i=0; i<MAX_FEEDS; i++) {
 	    			
-	    			int n = randGen.nextInt(MAX_FEEDS);
+	    			int n = randGen.nextInt(elements);
 	    			
 	    			feeds_list[i] = feeds[0][n];
 	    		}
+	    		
+	    		elements = MAX_FEEDS;
 	    			    		
 	    	}	    	
 	    	//Not many :)

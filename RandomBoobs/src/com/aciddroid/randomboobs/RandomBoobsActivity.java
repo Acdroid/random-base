@@ -338,7 +338,7 @@ public class RandomBoobsActivity extends Activity {
 			Bitmap bm = null;
 
 			try {
-
+ 
 				session_bytes += getFilesize(url[0]);
 				Log.v("TEST", "Trying to download: "+url[0]);
 				bm = BitmapFactory.decodeStream((InputStream)new URL(url[0]).getContent());
