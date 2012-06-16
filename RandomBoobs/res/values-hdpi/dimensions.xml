@@ -2,7 +2,12 @@
 <resources>
     
     <dimen name="header_height">50dp</dimen>
-    <dimen name="footer_height">30dp</dimen>
+    <dimen name="footer_height">45dp</dimen>
+    
+    <dimen name="footer_margin_right">10dp</dimen>
+    <dimen name="footer_margin_left">10dp</dimen>
+    
+    <dimen name="header_margin_left">10dp</dimen>
     
     
     <dimen name="corner_width">80dp</dimen>
@@ -10,5 +15,7 @@
     
     <dimen name="progress_margin_right">5dp</dimen>
     <dimen name="progress_width">75dp</dimen>
+    
+    
 
 </resources>

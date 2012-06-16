@@ -27,7 +27,7 @@ public class FeedUtil {
 	
 	private static String[] feed_list;
 	
-	private static final boolean TEST_MODE = false; //true = NSFW
+	private static final boolean TEST_MODE = false; //false = NSFW
 	
 	public static final int MESSAGE_FINISHED= 0;
 	public static final int MESSAGE_ERROR= 1;
