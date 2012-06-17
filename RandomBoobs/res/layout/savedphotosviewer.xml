@@ -10,6 +10,23 @@
         android:layout_alignParentTop="true"
         layout="@layout/header_layout" />
 
+    <GridView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/gridview"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/grid_margin"
+        android:columnWidth="@dimen/grid_width_size"
+        android:horizontalSpacing="0dp"
+        android:isScrollContainer="true"
+        android:numColumns="auto_fit"
+        android:persistentDrawingCache="scrolling"
+        android:scrollingCache="true"
+        android:stretchMode="spacingWidthUniform"
+        android:verticalSpacing="@dimen/grid_margin"
+        android:background="@drawable/content_bg" >
+    </GridView>
+
     <include
         android:id="@+id/footer_content"
         android:layout_width="match_parent"

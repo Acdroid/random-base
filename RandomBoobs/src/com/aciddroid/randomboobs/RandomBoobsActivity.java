@@ -96,21 +96,6 @@ public class RandomBoobsActivity extends Activity {
 		//Get content
 		getFeeds();
 
-		//Previous image and its action
-		View previous = findViewById(R.id.clickprev);
-		previous.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				
-				if (currentImage > 0) {
-					currentImage--;
-					setBitmapImage(bitmapCache[currentImage]);
-				}
-			}
-		});
-		
-		
 		//Save image and its action
 		ImageView saveIcon = (ImageView) findViewById(R.id.save);
 		saveIcon.setOnClickListener(new OnClickListener() {
@@ -142,6 +127,9 @@ public class RandomBoobsActivity extends Activity {
 					updating = true;
 					progressBar.setVisibility(View.VISIBLE);
 					getFeeds();
+					//Put visible the next/previous arrows
+					((ImageView)findViewById(R.id.next)).setVisibility(View.GONE);
+					((ImageView)findViewById(R.id.previous)).setVisibility(View.GONE);
 				}
 			}
 		});
@@ -203,9 +191,26 @@ public class RandomBoobsActivity extends Activity {
 
 		currentImage = 0;
 
-		//When clicking on the image
-		View next = findViewById(R.id.clicknext);
+		//Put visible the next/previous arrows
+		((ImageView)findViewById(R.id.next)).setVisibility(View.VISIBLE);
+		((ImageView)findViewById(R.id.previous)).setVisibility(View.VISIBLE);
+		
+		//Previous image and its action
+		View previous = findViewById(R.id.clickprev);
+		previous.setOnClickListener(new OnClickListener() {
 
+			@Override
+			public void onClick(View v) {
+				
+				if (currentImage > 0) {
+					currentImage--;
+					setBitmapImage(bitmapCache[currentImage]);
+				}
+			}
+		});
+		
+		//Next image click action
+		View next = findViewById(R.id.clicknext);
 		next.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -246,7 +251,7 @@ public class RandomBoobsActivity extends Activity {
 
 		});
 
-		Toast.makeText(this, getString(R.string.click_image), 1000).show();
+		//Toast.makeText(this, getString(R.string.click_image), 1000).show();
 	}
 
 
