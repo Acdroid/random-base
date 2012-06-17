@@ -15,5 +15,8 @@
     <!-- SavedPhotosViewer -->
     <dimen name="grid_margin">10dp</dimen>
     <dimen name="grid_width_size">100dp</dimen>
+    <dimen name="grid_height_size">300dp</dimen>
+    
+    <dimen name="grid_noimagetext_size">25sp</dimen>
     
 </resources>
