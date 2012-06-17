@@ -5,9 +5,8 @@
 
     <RelativeLayout
         android:id="@+id/header"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/header_height"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true" >
 
         <include
@@ -18,7 +17,7 @@
 
     <RelativeLayout
         android:id="@+id/footer"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/footer_height"
         android:layout_alignParentBottom="true" >
 
@@ -30,10 +29,10 @@
 
     <RelativeLayout
         android:id="@+id/content"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/footer"
-        android:layout_below="@+id/header"
+        android:layout_above="@id/footer"
+        android:layout_below="@id/header"
         android:layout_centerHorizontal="true" >
         
         <include

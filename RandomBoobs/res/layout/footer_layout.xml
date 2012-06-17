@@ -28,6 +28,15 @@
             android:layout_toLeftOf="@id/save"
             android:src="@drawable/ic_share" />
 
+        <ImageView
+            android:id="@+id/downloads"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/footer_margin_right"
+            android:layout_toLeftOf="@id/share"
+            android:src="@drawable/ic_download" />
+
         <ProgressBar
             android:id="@+id/progress"
             style="?android:attr/progressBarStyleHorizontal"
@@ -35,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/progress_margin_right"
-            android:layout_toLeftOf="@id/share"
+            android:layout_toLeftOf="@id/downloads"
             android:visibility="gone" />
 
         <ProgressBar
@@ -45,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/footer_margin_right"
-            android:layout_toLeftOf="@+id/share"
+            android:layout_toLeftOf="@id/downloads"
             android:visibility="gone" />
 
         <ImageView
