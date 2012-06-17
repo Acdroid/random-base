@@ -44,6 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/progress_margin_right"
+            android:layout_marginLeft="@dimen/progress_margin_right"
             android:layout_toLeftOf="@id/downloads"
             android:visibility="gone" />
 

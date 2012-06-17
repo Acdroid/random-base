@@ -119,13 +119,13 @@ public class SavedPhotosViewer extends Activity {
 				AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 				builder.setMessage(activity.getResources().getString(R.string.suretodelete))
 				.setCancelable(false)
-				.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+				.setPositiveButton(activity.getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
 						deleteImage(position);
 						dialog.cancel();
 					}
 				})
-				.setNegativeButton("No", new DialogInterface.OnClickListener() {
+				.setNegativeButton(activity.getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
 						dialog.cancel();
 					}

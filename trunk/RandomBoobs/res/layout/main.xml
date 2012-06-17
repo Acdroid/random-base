@@ -34,12 +34,10 @@
         android:layout_above="@id/footer"
         android:layout_below="@id/header"
         android:layout_centerHorizontal="true" >
-        
+
         <include
             android:id="@+id/content_content"
             android:layout_alignParentTop="true"
             layout="@layout/content_layout" />
-        
     </RelativeLayout>
-
 </RelativeLayout>
