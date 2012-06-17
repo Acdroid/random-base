@@ -37,6 +37,7 @@ public class RandomBoobsActivity extends Activity {
 
 
 	private static final String APP_DIR = "randomBoobs";
+	public static final String DOWNLOAD_DIR = Environment.getExternalStorageDirectory()+"/"+APP_DIR+"/";
 	
 	private static final int MAX_CACHE_SIZE = 500;
 
@@ -147,10 +148,6 @@ public class RandomBoobsActivity extends Activity {
 		});
 
 	}
-
-
-
-
 
 
 	/**
@@ -302,7 +299,7 @@ public class RandomBoobsActivity extends Activity {
 			formatter = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
 			String time = formatter.format(date);
 
-			String path		= Environment.getExternalStorageDirectory()+"/"+APP_DIR+"/";
+			String path		= DOWNLOAD_DIR;
 			String filename = time+".jpg";
 			String dest		= path+filename;									
 

@@ -10,6 +10,11 @@
 	<string name="share_image_text1">Look what I\'ve found using </string>
 	<string name="share_image_text2"> for Android !</string>
 	
+	<string name="grid_noimages">Aún no has guardado ninguna imagen</string>
+	<string name="failwhileloading">Error while loading the image</string>
+	<string name="longclicktoremove">Long click on a image to remove it</string>
+	<string name="suretodelete">"Are you sure you want to delete the image?"</string>
+	
 	<string name="mb">MB</string>
 
 </resources>
