@@ -28,7 +28,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -98,8 +97,8 @@ public class RandomBoobsActivity extends Activity {
 		getFeeds();
 
 		//Previous image and its action
-		ImageView previousIcon = (ImageView) findViewById(R.id.previous);
-		previousIcon.setOnClickListener(new OnClickListener() {
+		View previous = findViewById(R.id.clickprev);
+		previous.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
@@ -146,6 +145,19 @@ public class RandomBoobsActivity extends Activity {
 				}
 			}
 		});
+		
+		
+		//View Downloads
+		ImageView downloadsIcon = (ImageView) findViewById(R.id.downloads);
+		downloadsIcon.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(RandomBoobsActivity.this,SavedPhotosViewer.class);
+				startActivity(i);
+			}
+		});
+
 	}
 
 
@@ -192,9 +204,9 @@ public class RandomBoobsActivity extends Activity {
 		currentImage = 0;
 
 		//When clicking on the image
-		RelativeLayout contentContainer = (RelativeLayout) findViewById(R.id.content_container);
+		View next = findViewById(R.id.clicknext);
 
-		contentContainer.setOnClickListener(new OnClickListener() {
+		next.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
@@ -234,8 +246,7 @@ public class RandomBoobsActivity extends Activity {
 
 		});
 
-		Toast t = Toast.makeText(this, getString(R.string.click_image), 1000);
-		t.show();
+		Toast.makeText(this, getString(R.string.click_image), 1000).show();
 	}
 
 
