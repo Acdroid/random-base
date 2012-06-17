@@ -25,7 +25,8 @@
             android:layout_height="50dp"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_previous" />
+            android:src="@drawable/ic_previous" 
+            android:visibility="gone"/>
 
         <ImageView
             android:id="@+id/next"
@@ -33,7 +34,8 @@
             android:layout_height="50dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_next" />
+            android:src="@drawable/ic_next"
+            android:visibility="gone" />
 
         <LinearLayout
             android:layout_width="fill_parent"
