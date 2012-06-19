@@ -17,7 +17,8 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/footer_margin_right"
-            android:src="@drawable/ic_save" />
+            android:src="@drawable/ic_save" 
+            android:onClick="clickSaveImage"/>
 
         <ImageView
             android:id="@+id/share"
@@ -26,7 +27,8 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/footer_margin_right"
             android:layout_toLeftOf="@id/save"
-            android:src="@drawable/ic_share" />
+            android:src="@drawable/ic_share" 
+            android:onClick="clickShareImage"/>
 
         <ImageView
             android:id="@+id/downloads"
@@ -35,7 +37,8 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/footer_margin_right"
             android:layout_toLeftOf="@id/share"
-            android:src="@drawable/ic_download" />
+            android:src="@drawable/ic_download" 
+            android:onClick="clickDownload"/>
 
         <ProgressBar
             android:id="@+id/progress"
@@ -65,7 +68,8 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/footer_margin_left"
-            android:src="@drawable/ic_refresh" />
+            android:src="@drawable/ic_refresh"
+            android:onClick="clickRefresh" />
 
         <TextView
             android:id="@+id/bandwidth"

@@ -1,17 +1,19 @@
 package com.aciddroid.randomboobs;
 
 import java.io.File;
-import java.util.ArrayList;
 
-import com.flurry.android.FlurryAgent;
+import java.util.ArrayList;
+import java.util.ListIterator;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -29,6 +31,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.flurry.android.FlurryAgent;
 
 public class SavedPhotosViewer extends Activity {
 
@@ -52,6 +56,22 @@ public class SavedPhotosViewer extends Activity {
 
 	}
 
+	@Override
+	protected void onStart() {
+		super.onStart();
+		FlurryAgent.onStartSession(this, RandomBoobsActivity.FLURRY_APP_ID);
+		FlurryAgent.setReportLocation(true);
+		FlurryAgent.logEvent("Downloaded", true);	
+	}
+
+	/**
+	 * Method onStop.
+	 */
+	@Override
+	protected void onStop() {
+		super.onStop();
+		FlurryAgent.onEndSession(this);
+	}
 
 	/**
 	 * Called when the activity is first created.
@@ -72,22 +92,6 @@ public class SavedPhotosViewer extends Activity {
 		loadGrid();
 
 	}
-	@Override
-	protected void onStart() {
-		super.onStart();
-		FlurryAgent.onStartSession(this, RandomBoobsActivity.FLURRY_APP_ID);
-		FlurryAgent.setReportLocation(true);
-		FlurryAgent.logEvent("Downloaded", true);	
-	}
-
-	/**
-	 * Method onStop.
-	 */
-	@Override
-	protected void onStop() {
-		super.onStop();
-		FlurryAgent.onEndSession(this);
-	}
 
 	/**
 	 * Get the list of images from the donwload directory
@@ -106,14 +110,22 @@ public class SavedPhotosViewer extends Activity {
 		}
 
 		fileList.clear();
+		ArrayList<String> aux = new ArrayList<String>();
 		for (File file : files){
-			fileList.add(file.getPath());  
+			aux.add(file.getPath());  
 		}
 
+		//Damos la vuelta a la lista para pintar las imágenes de nuevas a viejas
+		if (aux.size() > 0){
+			ListIterator<String> iter = aux.listIterator(aux.size());
+			while (iter.hasPrevious()){
+				fileList.add(iter.previous());
+			}
+		}
 
-
+		//set Adapter to the grid
 		gridView.setAdapter(new GridAdapter(this));
-
+		
 		//Click on a item of the gridview
 		gridView.setOnItemClickListener(new OnItemClickListener(){
 
@@ -166,7 +178,18 @@ public class SavedPhotosViewer extends Activity {
 		}
 	}
 
-
+	public void clickShareImage(View v){
+		String path = (String)fileList.get(currentImage);
+		if (path == null || path.equals(""))
+			return;
+		
+		Intent share = new Intent(Intent.ACTION_SEND);
+		share.setType("image/jpeg");
+		
+		share.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" + path));
+		startActivity(Intent.createChooser(share, getResources().getString(R.string.share_image_jpg)));
+	}
+	
 	/**
 	 * Expand the image to full screen
 	 * @param position of the image in the filesList
@@ -210,6 +233,25 @@ public class SavedPhotosViewer extends Activity {
 
 
 		return true;
+	}
+	
+	/**
+	 * Load a image from the sdcard and put it on the Image_full_screen imageview
+	 * @param position
+	 * @return
+	 */
+	private Bitmap getImage(int position){
+		if (fileList == null || fileList.size() < position)
+			return null;
+
+		//Load the image
+		String path = (String)fileList.get(position);
+		if (path != null && !path.equals("")){
+			Bitmap bitmap = BitmapFactory.decodeFile(path);
+			return bitmap;
+		}
+		
+		return null;
 	}
 
 	public void clickNext(View v){
@@ -266,7 +308,7 @@ public class SavedPhotosViewer extends Activity {
 			}
 
 			String path = (String)getItem(position);
-
+			
 			if (path != null && !path.equals("")){
 				Bitmap bitmap = BitmapFactory.decodeFile(path);
 				if (bitmap == null ) Log.d("DEBUG","Bitmap return " + bitmap);

@@ -46,13 +46,15 @@
                 android:id="@+id/clickprev"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:onClick="clickPreviousImage" />
 
             <View
                 android:id="@+id/clicknext"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:onClick="clickNextImage" />
         </LinearLayout>
     </RelativeLayout>
 
