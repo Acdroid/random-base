@@ -3,6 +3,8 @@ package com.aciddroid.randomboobs;
 import java.io.File;
 import java.util.ArrayList;
 
+import com.flurry.android.FlurryAgent;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -69,6 +71,22 @@ public class SavedPhotosViewer extends Activity {
 		gridView = (GridView)findViewById(R.id.gridview);
 		loadGrid();
 
+	}
+	@Override
+	protected void onStart() {
+		super.onStart();
+		FlurryAgent.onStartSession(this, RandomBoobsActivity.FLURRY_APP_ID);
+		FlurryAgent.setReportLocation(true);
+		FlurryAgent.logEvent("Downloaded", true);	
+	}
+
+	/**
+	 * Method onStop.
+	 */
+	@Override
+	protected void onStop() {
+		super.onStop();
+		FlurryAgent.onEndSession(this);
 	}
 
 	/**

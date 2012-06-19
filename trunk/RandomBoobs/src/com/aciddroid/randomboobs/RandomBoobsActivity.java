@@ -32,13 +32,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.aciddroid.randomboobs.feeds.FeedUtil;
+import com.flurry.android.FlurryAgent;
 
 public class RandomBoobsActivity extends Activity {
 
 
 	private static final String APP_DIR = "randomBoobs";
 	public static final String DOWNLOAD_DIR = Environment.getExternalStorageDirectory()+"/"+APP_DIR+"/";
-	
+	public static final String FLURRY_APP_ID = "53GH9D9MB8KMXJDSDNZT";
+
 	private static final int MAX_CACHE_SIZE = 500;
 
 	/**Bytes used on this session*/
@@ -78,6 +80,19 @@ public class RandomBoobsActivity extends Activity {
 	  
 	}
 	
+	@Override
+	protected void onStart() {
+		super.onStart();
+		FlurryAgent.onStartSession(this, FLURRY_APP_ID);
+		FlurryAgent.setReportLocation(true);
+		FlurryAgent.logEvent("PantPrincipal", true);		
+	}
+	
+	@Override
+	protected void onStop() {
+		super.onStop();
+		FlurryAgent.onEndSession(this);
+	}
 
 	/**
 	 * Called when the activity is first created.
