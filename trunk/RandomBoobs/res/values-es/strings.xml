@@ -6,9 +6,14 @@
 	<string name="image_saved">Imagen guardada en:</string>
 	<string name="click_image">Tap en la imagen para ver una nueva.</string>
 	
+	<string name="image_downloading">La imagen siguiente se está descargando...</string>
+	<string name="feeds_downloading">Espera mientras se descargan referencias a más imágenes...</string>
+	
 	<string name="share_image_title">RandomB</string>
 	<string name="share_image_text1">Mira lo que he encontrado usando </string>
 	<string name="share_image_text2"> para Android !</string>
+	
+	<string name="share_image_jpg">"Compartir imagen"</string>
 	
 	<string name="grid_noimages">Aún no has guardado ninguna imagen.</string>
 	<string name="failwhileloading">Error cargando la imagen</string>
