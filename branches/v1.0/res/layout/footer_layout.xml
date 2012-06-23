@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/footer_bg"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/footer_container"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <ImageView
+            android:id="@+id/save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/footer_margin_right"
+            android:src="@drawable/ic_save" 
+            android:onClick="clickSaveImage"/>
+
+        <ImageView
+            android:id="@+id/share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/footer_margin_right"
+            android:layout_toLeftOf="@id/save"
+            android:src="@drawable/ic_share" 
+            android:onClick="clickShareImage"/>
+
+        <ImageView
+            android:id="@+id/downloads"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/footer_margin_right"
+            android:layout_toLeftOf="@id/share"
+            android:src="@drawable/ic_download" 
+            android:onClick="clickDownload"/>
+
+        <ProgressBar
+            android:id="@+id/progress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="@dimen/progress_width"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/progress_margin_right"
+            android:layout_marginLeft="@dimen/progress_margin_right"
+            android:layout_toLeftOf="@id/downloads"
+            android:visibility="gone" />
+
+        <ProgressBar
+            android:id="@+id/wait"
+            style="?android:attr/progressBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/footer_margin_right"
+            android:layout_toLeftOf="@id/downloads"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/refresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/footer_margin_left"
+            android:src="@drawable/ic_refresh"
+            android:onClick="clickRefresh" />
+
+        <TextView
+            android:id="@+id/bandwidth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/footer_margin_left"
+            android:layout_toRightOf="@+id/refresh"
+            android:textColor="@color/textcolor"
+            android:textStyle="italic" />
+    </RelativeLayout>
+
+</LinearLayout>

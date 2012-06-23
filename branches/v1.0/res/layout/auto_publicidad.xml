@@ -1,0 +1,12 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:id="@+id/auto_publicidad"
+		android:layout_height="50dip"
+		android:layout_width="320dip"
+		android:orientation="horizontal"
+		android:gravity="center">
+		<ImageView 
+			android:id="@+id/auto_publicidad_ima"
+			android:layout_height="50dip"
+			android:layout_width="320dip"
+			android:src="@drawable/autopublicidad" />
+</LinearLayout>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">RandomB</string>
+    
+    
+	<string name="image_saved">Image saved to:</string>
+	<string name="click_image">Tap on the image to see a new one.</string>
+	
+	<string name="image_downloading">The next image is downloading...</string>
+	<string name="feeds_downloading">Please wait while loading further image references...</string>
+	
+	<string name="share_image_title">RamdomB</string>
+	<string name="share_image_text1">Look what I\'ve found using </string>
+	<string name="share_image_text2"> for Android !</string>
+	
+	<string name="share_image_jpg">"Share Image"</string>
+	
+	<string name="grid_noimages">You haven\'t saved any images yet.</string>
+	<string name="failwhileloading">Error loading the image</string>
+	<string name="longclicktoremove">Long click on a image to delete it</string>
+	<string name="suretodelete">"Do you really want to delete the image?"</string>
+	<string name="yes">Yes</string>
+	<string name="no">No</string>
+	
+	<string name="mb">MB</string>
+
+</resources>
