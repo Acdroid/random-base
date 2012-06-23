@@ -40,4 +40,13 @@
             android:layout_alignParentTop="true"
             layout="@layout/content_layout" />
     </RelativeLayout>
+    
+     <!-- Publicidad -->
+    <com.mobclix.android.sdk.MobclixMMABannerXLAdView
+        android:id="@+id/mobclix_publicidad"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:layout_above="@id/footer"
+        android:layout_gravity="center"
+        android:tag="adspace"/>
 </RelativeLayout>

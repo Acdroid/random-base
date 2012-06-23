@@ -31,7 +31,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.aciddroid.randomboobs.feeds.FeedUtil;
+import com.aciddroid.randomboobs.utils.mobclixListener.MobclixFullScreenListener;
+import com.aciddroid.randomboobs.utils.mobclixListener.MobclixListener;
 import com.flurry.android.FlurryAgent;
+import com.mobclix.android.sdk.MobclixAdView;
+import com.mobclix.android.sdk.MobclixFullScreenAdView;
+import com.mobclix.android.sdk.MobclixMMABannerXLAdView;
+
 
 public class RandomBoobsActivity extends Activity {
 
@@ -63,7 +69,21 @@ public class RandomBoobsActivity extends Activity {
 
 	//The image currently shown
 	private int currentImage;
+	
+	//Publicidad
+	public MobclixAdView adView;
+	public MobclixFullScreenAdView fullScreenAdView;
+	public int numNextClicks = 0;
+	public boolean showMobclix = false;
+	public Handler handlerMobclix = new Handler(){
+		@Override
+		public void handleMessage(Message msg) {
 
+			Boolean mobclixOK = (Boolean)msg.obj;
+			showMobclix = mobclixOK;
+		}
+
+	};
 
 	public static ProgressBar getProgressBar() {
 		return progressBar;
@@ -77,8 +97,8 @@ public class RandomBoobsActivity extends Activity {
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);
-		setContentView(R.layout.main);
-		continueBrowsing();	  
+//		setContentView(R.layout.main);
+//		continueBrowsing();	  
 	}
 
 	@Override
@@ -110,6 +130,15 @@ public class RandomBoobsActivity extends Activity {
 		progressBar = (ProgressBar) this.findViewById(R.id.progress);
 		progressBar.setVisibility(View.VISIBLE);
 
+		//Publicidad
+		adView = (MobclixMMABannerXLAdView)findViewById(R.id.mobclix_publicidad);
+	//	adView.setTestMode(true);
+		adView.addMobclixAdViewListener(new MobclixListener());
+		
+		fullScreenAdView = new MobclixFullScreenAdView(this);
+		fullScreenAdView.addMobclixAdViewListener(new MobclixFullScreenListener(handlerMobclix));
+		
+		
 		//Get content
 		getFeeds();
 	}
@@ -396,6 +425,12 @@ public class RandomBoobsActivity extends Activity {
 				getFeeds();
 			}
 			else {
+				//Check and call Full Screen Ads
+				numNextClicks ++;
+				if (!showMobclix && numNextClicks%10 == 0){
+					fullScreenAdView.requestAd();
+				}
+				
 				waitBar.setVisibility(View.VISIBLE);
 				Log.v("TEST", "Displaying: "+(currentImage+1)+"/"+max);
 
