@@ -32,7 +32,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.aciddroid.randomboobs.utils.mobclixListener.MobclixListener;
 import com.flurry.android.FlurryAgent;
+import com.mobclix.android.sdk.MobclixAdView;
+import com.mobclix.android.sdk.MobclixMMABannerXLAdView;
 
 public class SavedPhotosViewer extends Activity {
 
@@ -44,6 +47,9 @@ public class SavedPhotosViewer extends Activity {
 	private Boolean isImageFullScreen = false;
 	private int currentImage = 0;
 	private Activity activity;
+	
+	//Publicidad
+	public MobclixAdView adView;
 
 
 	/**
@@ -89,6 +95,12 @@ public class SavedPhotosViewer extends Activity {
 		layoutImageFull = (RelativeLayout)findViewById(R.id.layout_full_screen);
 
 		gridView = (GridView)findViewById(R.id.gridview);
+		
+		//Publicidad
+		adView = (MobclixMMABannerXLAdView)findViewById(R.id.mobclix_publicidad);
+		//adView.setTestMode(true);
+		adView.addMobclixAdViewListener(new MobclixListener());
+		
 		loadGrid();
 
 	}
