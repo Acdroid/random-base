@@ -25,10 +25,10 @@ public class MobclixFullScreenListener implements  MobclixFullScreenAdViewListen
 	@Override
 	public void onFailedLoad(MobclixFullScreenAdView ad, int errorValue) {
 		Log.i("Ads","Ad Full Screen no disponible pidiendo otro. Error " + errorValue);
-		if (errorValue == -503){
-			ad.requestAd();
-			Log.i("Ads","Ad Full Screen pedido...");
-		}
+//		if (errorValue == -503){
+//			ad.requestAd();
+//			Log.i("Ads","Ad Full Screen pedido...");
+//		}
 		
 	}
 
